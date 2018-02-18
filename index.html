@@ -189,9 +189,6 @@
     'link':'https://music.163.com/song/media/outer/url?id=5268113.mp3','icon':'https://ws2.sinaimg.cn/large/006tNbRwgy1foktb36i2qj30dm0dmn2u.jpg',
     'id':'5268113','tips':["SQ","独家"],'mv':''},
 
-    {'name':'Maps','detail':'Maroon 5·Maps',
-    'link':'https://music.163.com/song/media/outer/url?id=28661564.mp3','icon':'http://p1.music.126.net/OC3XXrblVQPgXrkZyLaPow==/3394192437682072.jpg?param=130y130',
-    'id':'28661564','tips':[],'mv':''},
 
     {'name':'等你下课 (with 杨瑞代)','detail':'周杰伦·等你下课',
     'link':'http://music.163.com/song/media/outer/url?id=531051217.mp3','icon':'https://ws4.sinaimg.cn/large/006tNbRwgy1fokuf090rmj303m03m3yc.jpg',
@@ -204,7 +201,11 @@
 
     {'name':'霸王别姬','detail':'赵季平·霸王别姬 电影原声带',
     'link':'http://music.163.com/song/media/outer/url?id=196672.mp3','icon':'http://p1.music.126.net/S92wHxkuTq7L3yeR0Vpyiw==/80264348845273.jpg?param=130y130',
-    'id':'196672','tips':["SQ"],'mv':''}];
+    'id':'196672','tips':["SQ"],'mv':''},
+    
+    {'name':'Maps','detail':'Maroon 5·Maps',
+    'link':'https://music.163.com/song/media/outer/url?id=28661564.mp3','icon':'http://p1.music.126.net/OC3XXrblVQPgXrkZyLaPow==/3394192437682072.jpg?param=130y130',
+    'id':'28661564','tips':[],'mv':''}];
     
     var currentIndex = 0;
     //加载列表
@@ -239,10 +240,13 @@
         $("audio")[0].pause();
         clearInterval(playInterval);
       $(".mdui-video-fluid")[0].src=mv;
-      setTimeout(function(){
+
+      $("audio")[0].src=link;//路径
+      $("audio")[0].ondurationchange=function(){
+        alert("go");
         var inst = new mdui.Dialog('#music-MV');
       inst.open();
-      },1000);
+      };
       
       var dialog = document.getElementById('music-MV');
       dialog.addEventListener('close.mdui.dialog', function () {
@@ -258,7 +262,7 @@
         $("#large-progress").css("width", widthDuration);
         if(widthDuration=="100.00%"){
           currentIndex = getCurrentIndex()+1;
-          if(currentIndex = $("#musicListUl li").length ){
+          if(currentIndex == $("#musicListUl li").length ){
             currentIndex=0;
           }
           $("#musicListUl li").eq(currentIndex).click();
@@ -278,7 +282,11 @@
       $("#musicPlayer-icon")[0].src=icon;
       
       $("audio")[0].src=link;//路径
-      playBtn();
+      $("audio")[0].ondurationchange=function(){
+        alert("go");
+        playBtn();
+      };
+      
     }
 
     //播放暂停

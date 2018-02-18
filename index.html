@@ -65,6 +65,14 @@
   .playList-active p{
     color:#009688!important;
   }
+  .playList-active::before{
+    content: "";
+    position: absolute;
+    left: 0px;
+    background-color:#009688!important;
+    width:4px;
+    height:40px;
+  }
   .mvSpan{
       border-radius: 5px;
       padding: 3px 5px;
@@ -126,7 +134,7 @@
   </div>
   <div id="music-MV" style="width:96%;" class="mdui-dialog" >
       <div style="padding:3px; min-height:200px;"  class="mdui-dialog-content">
-          <video class="mdui-video-fluid" autoplay="autoplay"  controls="" src="" ></video>
+          <video style="width: 100%;" class="mdui-video-fluid" autoplay="autoplay"  controls="" src="" ></video>
       </div>
     
       <div class="mdui-dialog-actions">
@@ -149,7 +157,27 @@
       getMusicList();
       $("#musicListUl li").eq(0).click();
     })
-    var json = [{'name':'无心睡眠','detail':'张国荣·Summer Romance',
+    var json = [{'name':'Heartbeat','detail':'PØRPEL / Marcus & Martinus',
+    'link':'http://music.163.com/song/media/outer/url?id=513357140.mp3','icon':'http://p1.music.126.net/I_UDbIsryVrLsLfhgE85PA==/109951163044960154.jpg?param=130y130',
+    'id':'513357140','tips':["HQ"],'mv':''},
+    
+    {'name':'阴天快乐','detail':'陈奕迅·rice & shine',
+    'link':'http://music.163.com/song/media/outer/url?id=28563317.mp3','icon':'http://p1.music.126.net/EES1U3UVWUdt_tHyiY8XAw==/5962651557619306.jpg?param=130y130',
+    'id':'28563317','tips':["SQ","独家"],'mv':''},
+    
+    {'name':'Heartbeat','detail':'Childish Gambino·Camp',
+    'link':'https://music.163.com/song/media/outer/url?id=16961463.mp3','icon':'http://p1.music.126.net/fg3YsjnSuS7C93Sv5mfLzg==/647612348767757.jpg?param=130y130',
+    'id':'16961463','tips':["HQ",],'mv':'http://v4.music.126.net/20180219131550/f0e2b83c94eb28807ac2451f3178b51d/web/cloudmusic/IDEgYCEkJDAiMSAwIDQwIg==/mv/525015/14110da95e0db8d0a3e4b93dabd9cf15.mp4'},
+
+    {'name':'Pay for It','detail':'Jay Rock / Kendrick Lamar / Chantal·Pay for It',
+    'link':'https://music.163.com/song/media/outer/url?id=29593534.mp3','icon':'http://p1.music.126.net/_qxVx-2ZYmwNAfSqYJ5DQQ==/3238061743857765.jpg?param=130y130',
+    'id':'29593534','tips':["HQ",],'mv':''},
+
+    {'name':'Jungle','detail':'X Ambassadors / Jamie N Commons·VHS',
+    'link':'http://music.163.com/song/media/outer/url?id=31789003.mp3','icon':'http://p1.music.126.net/vWxtUi1JhbQD_zupnoGr0w==/2924700930965763.jpg?param=130y130',
+    'id':'31789003','tips':["SQ"],'mv':'http://v4.music.126.net/20180219130929/2ce72ada475e0215c38abfcd54be5b01/web/cloudmusic/MCA2ITAkYiAwICMgIGJiMA==/mv/==/281072/20140618165250/2240804797409398_crop480.mp4'},
+    
+    {'name':'无心睡眠','detail':'张国荣·Summer Romance',
     'link':'https://music.163.com/song/media/outer/url?id=188979.mp3','icon':'https://ws3.sinaimg.cn/large/006tNbRwgy1fokiycw4kdj30dw0dm0te.jpg',
     'id':'188979','tips':["HQ","独家"],'mv':''},
 
@@ -167,7 +195,16 @@
 
     {'name':'等你下课 (with 杨瑞代)','detail':'周杰伦·等你下课',
     'link':'http://music.163.com/song/media/outer/url?id=531051217.mp3','icon':'https://ws4.sinaimg.cn/large/006tNbRwgy1fokuf090rmj303m03m3yc.jpg',
-    'id':'531051217','tips':["SQ"],'mv':''}];
+    'id':'531051217','tips':["SQ"],'mv':''},
+
+    {'name':'Girls','detail':'巡音ルカ·EasyPop VOCALOID Tracks 2',
+    'link':'http://music.163.com/song/media/outer/url?id=28606028.mp3','icon':'http://p1.music.126.net/EzDE0McR2gIZwsKb99stLA==/6069304185774923.jpg?param=130y130',
+    'id':'28606028','tips':["HQ"],'mv':''},
+
+
+    {'name':'霸王别姬','detail':'赵季平·霸王别姬 电影原声带',
+    'link':'http://music.163.com/song/media/outer/url?id=196672.mp3','icon':'http://p1.music.126.net/S92wHxkuTq7L3yeR0Vpyiw==/80264348845273.jpg?param=130y130',
+    'id':'196672','tips':["SQ"],'mv':''}];
     
     var currentIndex = 0;
     //加载列表
@@ -184,7 +221,7 @@
           mvstr = "<span class='mvSpan' onclick=\"openMV('"+json[e].mv+"')\">MV</span>";
         }
         str+="<li onclick=\"play('"+json[e].name+"','"+json[e].detail+"','"+json[e].link+"','"+json[e].icon+"',this)\" class='mdui-list-item mdui-ripple music-list-wrapper'>"
-        +"<div class='mdui-list-item-content music-list-item'>"
+        +"<div class='mdui-list-item-content music-list-item' style='margin-left:10px;'>"
           +"<p>"+json[e].name+""
             +tipstr
           +"</p>"
@@ -198,7 +235,9 @@
     //MV
     function openMV(mv){
       event.stopPropagation();
-      $("audio")[0].pause();
+      $("#playBtn").html("&#xe039;");
+        $("audio")[0].pause();
+        clearInterval(playInterval);
       $(".mdui-video-fluid")[0].src=mv;
       setTimeout(function(){
         var inst = new mdui.Dialog('#music-MV');

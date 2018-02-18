@@ -81,6 +81,7 @@
     color:white;
     margin-right: 11px;
   }
+
   </style>
 </head>
 
@@ -115,6 +116,7 @@
         </div>
         <i onclick="playBtn()" id="playBtn" class="mdui-icon material-icons" style="color:#009688!important; font-size:38px;">&#xe039;
         </i>
+        <div id="play-spinner" style="display:none;" class="mdui-spinner mdui-spinner-colorful"></div>
         <i mdui-dialog="{target: '#music-opts'}" class="mdui-icon material-icons" style="color:#009688!important; font-size:38px;margin-left:14px;">&#xe03d;</i>
       </div>
   </div>
@@ -149,7 +151,6 @@
   </div>
   <audio style='display:none;'></audio>
   <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
-  <script src="https://mdui-aliyun.cdn.w3cbus.com/docs/assets/smooth-scroll-11.1.0/smooth-scroll.min.js"></script>
   <script src="https://cdn.bootcss.com/mdui/0.4.0/js/mdui.min.js"></script>
   <!-- <script>var $$ = mdui.JQ;</script> -->
   <script>
@@ -240,13 +241,11 @@
         $("audio")[0].pause();
         clearInterval(playInterval);
       $(".mdui-video-fluid")[0].src=mv;
-
-      $("audio")[0].src=link;//路径
-      $("audio")[0].ondurationchange=function(){
-        alert("go");
+      
+      setTimeout(function(){
         var inst = new mdui.Dialog('#music-MV');
-      inst.open();
-      };
+        inst.open();
+      },800);
       
       var dialog = document.getElementById('music-MV');
       dialog.addEventListener('close.mdui.dialog', function () {
@@ -276,17 +275,20 @@
       $(e).addClass("playList-active");;
       if($("audio")[0].src==link){
         return false;
-      }
-      $("#musicPlayer-name").text(name);
+      }else{
+        $("#play-spinner").show();
+      $("#playBtn").hide();
+        $("#musicPlayer-name").text(name);
       $("#musicPlayer-detail").text(detail);
       $("#musicPlayer-icon")[0].src=icon;
       
       $("audio")[0].src=link;//路径
       $("audio")[0].ondurationchange=function(){
-        alert("go");
+        $("#play-spinner").hide();
+      $("#playBtn").fadeIn();
         playBtn();
       };
-      
+      }
     }
 
     //播放暂停

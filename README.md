@@ -1,5 +1,5 @@
 ## material design风格的音乐播放器
-- [demo](https://htmlpreview.github.io/?https://github.com/zc95/music/blob/master/index.html)
+- [demo](https://zc95.github.io/demo/music)
 - [github](https://github.com/zc95/music)
 ---------
 

@@ -136,7 +136,7 @@
     <ul id="musicListUl" class="mdui-list music-ul" style="padding:0 5px;"></ul>
   </div>
 
-  <div id="player-wrapper" class="mdui-list" style="position:fixed;bottom:0;left:0;right:0;padding:0;background-color:white;display:none;">
+  <div id="player-wrapper" class="mdui-list" style="position:fixed;bottom:0;left:0;right:0;padding:0;background-color:white;display:none;z-index:5050;">
     <div class="mdui-list-item" style="padding:0 10px;">
       <!-- <div class="mdui-progress" style="position:absolute;top:0;left:0;right:0;height:3px;">
         <div class="mdui-progress-determinate mini-progress" style="width: 0%;"></div>
@@ -333,7 +333,7 @@
     //获取进度条
     var playInterval;
     function getDuration() {
-      $("#changeProgress").fadeIn(3500);
+      $("#changeProgress").fadeIn(3800);
       playInterval = setInterval(function () {
         var widthDuration = $("audio")[0].currentTime / $("audio")[0].duration * 100;
         //$(".mini-progress").css("width", widthDuration);
@@ -351,10 +351,19 @@
 
     //快进快退
     function changeProgress() {
+      $("#playBtn").hide();
+      $("#play-spinner").fadeIn();
+
       $("audio")[0].currentTime = $(".mini-progress").val() / 100 * $("audio")[0].duration;
       if ($("audio")[0].paused) {
         playBtn();
+        
       }
+      setTimeout(function(){
+        $("#play-spinner").hide();
+        $("#playBtn").fadeIn();
+      
+      },2000);
     }
 
     //上一首下一首

@@ -194,7 +194,7 @@
     {
       'name': 'Jungle', 'detail': 'X Ambassadors / Jamie N Commons·VHS',
       'link': 'http://music.163.com/song/media/outer/url?id=31789003.mp3', 'icon': 'http://p1.music.126.net/vWxtUi1JhbQD_zupnoGr0w==/2924700930965763.jpg?param=130y130',
-      'id': '31789003', 'tips': ["SQ"], 'mv': 'http://v4.music.126.net/20180219130929/2ce72ada475e0215c38abfcd54be5b01/web/cloudmusic/MCA2ITAkYiAwICMgIGJiMA==/mv/==/281072/20140618165250/2240804797409398_crop480.mp4'
+      'id': '31789003', 'tips': ["SQ"], 'mv': 'http://v4.music.126.net/20180220133649/beb2a4cd9957b54bf54677765d0ce882/web/cloudmusic/MCA2ITAkYiAwICMgIGJiMA==/mv/==/281072/20140618165250/2240804797409398_crop480.mp4'
     },
 
     {
@@ -340,6 +340,9 @@
         // 暂停>播放
         $("#playBtn").html("&#xe036;");
         $("audio")[0].play();
+        if($("audio")[0].paused){
+          $("#playBtn").html("&#xe039;");
+        }
         getDuration();
         getCurrentIndex();
       } else {

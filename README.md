@@ -14,5 +14,5 @@
 
 -----
 ## 扫一扫
-<img src="https://ws3.sinaimg.cn/large/006tNc79gy1fonxkcugj3j307s07sq2p.jpg" height="30">
+<img src="https://ws3.sinaimg.cn/large/006tNc79gy1fonxkcugj3j307s07sq2p.jpg" height="300">
 

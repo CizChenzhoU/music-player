@@ -1,10 +1,6 @@
 ## material design风格的音乐播放器
 - [demo](https://zc95.github.io/demo/music)
 - [github](https://github.com/zc95/music)
----------
-
-
-
 
 <img src="https://ws2.sinaimg.cn/large/006tNc79gy1fony99p9rfj30u01hcmzd.jpg" height="680">
 
